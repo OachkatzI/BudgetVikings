@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{C771E895-4EAF-2D01-7DCF-22BA55B36BB7}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "BudgetVikings",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}
