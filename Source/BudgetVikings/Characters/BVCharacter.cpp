@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "BudgetVikingsCharacter.h"
+#include "BVCharacter.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -16,7 +16,7 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 //////////////////////////////////////////////////////////////////////////
 // ABudgetVikingsCharacter
 
-ABudgetVikingsCharacter::ABudgetVikingsCharacter()
+ABVCharacter::ABVCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -54,7 +54,7 @@ ABudgetVikingsCharacter::ABudgetVikingsCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
-void ABudgetVikingsCharacter::BeginPlay()
+void ABVCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
@@ -72,7 +72,7 @@ void ABudgetVikingsCharacter::BeginPlay()
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void ABudgetVikingsCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ABVCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
@@ -82,10 +82,10 @@ void ABudgetVikingsCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 		// Moving
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABudgetVikingsCharacter::Move);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABVCharacter::Move);
 
 		// Looking
-		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABudgetVikingsCharacter::Look);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABVCharacter::Look);
 	}
 	else
 	{
@@ -93,7 +93,7 @@ void ABudgetVikingsCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 	}
 }
 
-void ABudgetVikingsCharacter::Move(const FInputActionValue& Value)
+void ABVCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -116,7 +116,7 @@ void ABudgetVikingsCharacter::Move(const FInputActionValue& Value)
 	}
 }
 
-void ABudgetVikingsCharacter::Look(const FInputActionValue& Value)
+void ABVCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
