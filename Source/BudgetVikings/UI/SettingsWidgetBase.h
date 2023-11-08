@@ -9,7 +9,9 @@ UCLASS()
 class BUDGETVIKINGS_API USettingsWidgetBase : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
-
+	
+public:
+	
 	USettingsWidgetBase();
 
 protected:
