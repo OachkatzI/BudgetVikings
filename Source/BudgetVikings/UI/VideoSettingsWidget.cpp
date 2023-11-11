@@ -1,0 +1,2 @@
+#include "VideoSettingsWidget.h"
+
