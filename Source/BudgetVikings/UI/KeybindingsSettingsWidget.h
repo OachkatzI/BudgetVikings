@@ -6,6 +6,7 @@
 #include "KeybindingsSettingsWidget.generated.h"
 
 
+class USettingsCategoryHeader;
 class UEnhancedInputLocalPlayerSubsystem;
 class UCommonHierarchicalScrollBox;
 
@@ -34,6 +35,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UKeybindSettingWidget> KeybindSettingWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<USettingsCategoryHeader> CategoryHeaderWidgetClass;
 
 	UPROPERTY()
 	TArray<TObjectPtr<UKeybindSettingWidget>> DisplayedKeybindingEntries;

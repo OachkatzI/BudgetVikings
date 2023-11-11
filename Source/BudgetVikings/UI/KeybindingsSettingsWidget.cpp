@@ -2,6 +2,9 @@
 #include "CommonHierarchicalScrollBox.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputMappingContext.h"
+#include "SettingsCategoryHeader.h"
+#include "Blueprint/WidgetTree.h"
+#include "Components/VerticalBox.h"
 #include "UserSettings/EnhancedInputUserSettings.h"
 
 
@@ -41,15 +44,36 @@ void UKeybindingsSettingsWidget::ClearExistingChildren()
 
 void UKeybindingsSettingsWidget::PopulateBindingsUI()
 {
+	TMap<FString, UVerticalBox*> CategoryBoxes;
+	
 	for (const UInputMappingContext* MappingContext : EnhancedInputSubsystem->GetUserSettings()->GetRegisteredInputMappingContexts())
 	{
-		for (FEnhancedActionKeyMapping Mapping : MappingContext->GetMappings())
+		auto Mappings = MappingContext->GetMappings();
+		for (FEnhancedActionKeyMapping Mapping : Mappings)
 		{
+			if (Mapping.Key.IsAxis2D())
+			{
+				continue;
+			}
+
+			if (!CategoryBoxes.Contains(Mapping.GetDisplayCategory().ToString()))
+			{
+				
+				auto CategoryBox = WidgetTree->ConstructWidget<UVerticalBox>();//CreateWidget<UVerticalBox>(GetOwningPlayer(), UVerticalBox::StaticClass());
+				ScrollBox_Keybindings->AddChild(CategoryBox);
+				auto CategoryHeaderWidget = CreateWidget<USettingsCategoryHeader>(GetOwningPlayer(), CategoryHeaderWidgetClass);
+				CategoryHeaderWidget->SetText(Mapping.GetDisplayCategory());
+				CategoryBox->AddChild(CategoryHeaderWidget);
+				
+				CategoryBoxes.Add(Mapping.GetDisplayCategory().ToString(), CategoryBox);
+			}
+
 			auto KeybindSetting = CreateWidget<UKeybindSettingWidget>(GetOwningPlayer(), KeybindSettingWidgetClass);
 			KeybindSetting->SetOwningPlayer(GetOwningPlayer());
 			KeybindSetting->Init(EnhancedInputSubsystem, Mapping);
-			ScrollBox_Keybindings->AddChild(KeybindSetting);
 			DisplayedKeybindingEntries.Add(KeybindSetting);
+
+			CategoryBoxes[Mapping.GetDisplayCategory().ToString()]->AddChild(KeybindSetting);
 		}
 	}
 }
