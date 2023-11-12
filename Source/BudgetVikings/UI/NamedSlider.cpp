@@ -1,6 +1,7 @@
 #include "NamedSlider.h"
 #include "CommonTextBlock.h"
 #include "Components/Slider.h"
+#include "Kismet/KismetStringLibrary.h"
 
 
 void UNamedSlider::NativePreConstruct()
@@ -8,7 +9,9 @@ void UNamedSlider::NativePreConstruct()
 	Super::NativePreConstruct();
 
 	SetTitleText(Title);
-	SetValueText(FText::FromString(FString::FromInt(FMath::RoundToInt(Slider->GetValue() * 100.f))));
+	SetValueText(FText::FromString(FormatValue(Slider->GetValue())));
+	Slider->SetMinValue(MinValue);
+	Slider->SetMaxValue(MaxValue);
 }
 
 
@@ -20,15 +23,32 @@ void UNamedSlider::NativeConstruct()
 }
 
 
-void UNamedSlider::OnSliderValueChanged(float Value)
+void UNamedSlider::OnSliderValueChanged_Implementation(float Value)
 {
-	SetValueText(FText::FromString(FString::FromInt(FMath::RoundToInt(Value * 100.f))));
+	SetValueText(FText::FromString(FormatValue(Value)));
+	OnSliderValueChangedEvent.Broadcast(Value);
+}
+
+
+FString UNamedSlider::FormatValue(float Value)
+{
+	auto AsString = FString::SanitizeFloat(Value);
+	FString LeftOfDecimal;
+	FString RightOfDecimal;
+	if (UKismetStringLibrary::Split(AsString, FString("."), LeftOfDecimal, RightOfDecimal))
+	{
+		const int NumDecimalPoints = FMath::Min(2, UKismetStringLibrary::Len(RightOfDecimal));
+		auto TrimmedDecimalString = UKismetStringLibrary::GetSubstring(RightOfDecimal, 0, NumDecimalPoints);
+		return LeftOfDecimal.Append(".").Append(TrimmedDecimalString);
+	}
+	
+	return AsString;
 }
 
 
 void UNamedSlider::SetTitleText(const FText& NewTitle) const
 {
-	TitleText->SetText(Title);
+	TitleText->SetText(NewTitle);
 }
 
 

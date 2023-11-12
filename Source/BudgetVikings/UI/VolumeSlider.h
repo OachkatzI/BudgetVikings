@@ -16,13 +16,11 @@ class BUDGETVIKINGS_API UVolumeSlider : public UNamedSlider
 	
 protected:
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<USoundMix> SoundMix;
 	
-	UPROPERTY(EditInstanceOnly)
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
 	TObjectPtr<USoundClass> SoundClass;
-	
-private:
-	
-	virtual void OnSliderValueChanged(float Value) override;
+
+	virtual FString FormatValue(float Value) override;
 };

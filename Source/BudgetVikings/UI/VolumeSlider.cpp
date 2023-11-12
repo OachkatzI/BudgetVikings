@@ -1,10 +1,7 @@
 #include "VolumeSlider.h"
-#include "Kismet/GameplayStatics.h"
 
 
-void UVolumeSlider::OnSliderValueChanged(float Value)
+FString UVolumeSlider::FormatValue(float Value)
 {
-	Super::OnSliderValueChanged(Value);
-	
-	UGameplayStatics::SetSoundMixClassOverride(this, SoundMix, SoundClass, Value, 1.f, 0.f);
+	return FString::FromInt(FMath::RoundToInt(Value * 100.f));
 }

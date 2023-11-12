@@ -48,8 +48,7 @@ void UKeybindingsSettingsWidget::PopulateBindingsUI()
 	
 	for (const UInputMappingContext* MappingContext : EnhancedInputSubsystem->GetUserSettings()->GetRegisteredInputMappingContexts())
 	{
-		auto Mappings = MappingContext->GetMappings();
-		for (FEnhancedActionKeyMapping Mapping : Mappings)
+		for (FEnhancedActionKeyMapping Mapping : MappingContext->GetMappings())
 		{
 			if (Mapping.Key.IsAxis2D())
 			{
