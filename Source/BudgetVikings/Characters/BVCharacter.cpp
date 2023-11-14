@@ -86,6 +86,9 @@ void ABVCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABVCharacter::Look);
+
+		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &ABVCharacter::ToggleCrouching);
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &ABVCharacter::ToggleSprinting);
 	}
 	else
 	{
@@ -127,3 +130,34 @@ void ABVCharacter::Look(const FInputActionValue& Value)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }
+
+
+void ABVCharacter::ToggleCrouching(const FInputActionValue& Value)
+{
+	// Debug implementation
+
+	if (bIsCrouched)
+	{
+		UnCrouch();
+	}
+	else
+	{
+		Crouch();
+	}
+}
+
+
+void ABVCharacter::ToggleSprinting(const FInputActionValue& Value)
+{
+	// Debug implementation
+	
+	if (GetCharacterMovement()->MaxWalkSpeed == 500.f)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 1000.f;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 500.f;
+	}
+}
+

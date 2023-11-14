@@ -1,16 +1,13 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BVPlayerControllerBase.h"
 #include "GameFramework/PlayerController.h"
 #include "TutorialPlayerController.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
-class BUDGETVIKINGS_API ATutorialPlayerController : public APlayerController
+class BUDGETVIKINGS_API ATutorialPlayerController : public ABVPlayerControllerBase
 {
 	GENERATED_BODY()
 	

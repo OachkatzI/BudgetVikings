@@ -43,6 +43,12 @@ class ABVCharacter : public ACharacter
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* CrouchAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* SprintAction;
 
 public:
 	ABVCharacter();
@@ -55,7 +61,12 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-			
+
+	UFUNCTION(BlueprintCallable)
+	void ToggleCrouching(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintCallable)
+	void ToggleSprinting(const FInputActionValue& Value);			
 
 protected:
 	// APawn interface

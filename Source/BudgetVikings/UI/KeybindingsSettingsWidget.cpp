@@ -58,7 +58,7 @@ void UKeybindingsSettingsWidget::PopulateBindingsUI()
 			if (!CategoryBoxes.Contains(Mapping.GetDisplayCategory().ToString()))
 			{
 				
-				auto CategoryBox = WidgetTree->ConstructWidget<UVerticalBox>();//CreateWidget<UVerticalBox>(GetOwningPlayer(), UVerticalBox::StaticClass());
+				auto CategoryBox = WidgetTree->ConstructWidget<UVerticalBox>();
 				ScrollBox_Keybindings->AddChild(CategoryBox);
 				auto CategoryHeaderWidget = CreateWidget<USettingsCategoryHeader>(GetOwningPlayer(), CategoryHeaderWidgetClass);
 				CategoryHeaderWidget->SetText(Mapping.GetDisplayCategory());

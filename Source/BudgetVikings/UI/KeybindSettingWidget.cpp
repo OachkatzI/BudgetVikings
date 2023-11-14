@@ -36,7 +36,7 @@ void UKeybindSettingWidget::HandleIsWaitingForKey()
 
 void UKeybindSettingWidget::BindKey(const FKey& NewKey) const
 {
-	const UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetOwningPlayer()->GetLocalPlayer());
+	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetOwningPlayer()->GetLocalPlayer());
 	check(Subsystem);
 	
 	FMapPlayerKeyArgs InPlayerKeyArgs;
@@ -45,6 +45,7 @@ void UKeybindSettingWidget::BindKey(const FKey& NewKey) const
 	InPlayerKeyArgs.Slot = EPlayerMappableKeySlot::First;
 	FGameplayTagContainer OutFailureReason;
 	Subsystem->GetUserSettings()->MapPlayerKey(InPlayerKeyArgs, OutFailureReason);
+	Subsystem->RequestRebuildControlMappings();
 }
 
 
