@@ -8,6 +8,6 @@ public class BudgetVikings : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "CommonUI", "UMG", "SlateCore", "Slate", "OnlineSubsystem", "OnlineSubsystemSteam", "OnlineSubsystemUtils" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "CommonUI", "UMG", "SlateCore", "Slate", "OnlineSubsystem", "OnlineSubsystemSteam", "OnlineSubsystemUtils", "Json", "JsonUtilities" });
 	}
 }
