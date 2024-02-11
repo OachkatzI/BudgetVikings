@@ -1,4 +1,7 @@
 #include "MainMenuGameMode.h"
+
+#include "BudgetVikings/BVGameInstance.h"
+#include "BudgetVikings/UserDataSubsystem.h"
 #include "BudgetVikings/Settings/BVUserSettings.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -8,6 +11,12 @@ void AMainMenuGameMode::BeginPlay()
 	Super::BeginPlay();
 
 	ApplyAudioSettings();
+
+	GameInstance = GetGameInstance<UBVGameInstance>();
+	check(GameInstance);
+
+	UserDataSubsystem = GameInstance->GetSubsystem<UUserDataSubsystem>();
+	check(UserDataSubsystem);
 }
 
 

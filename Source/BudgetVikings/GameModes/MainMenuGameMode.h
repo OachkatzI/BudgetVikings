@@ -5,6 +5,10 @@
 #include "MainMenuGameMode.generated.h"
 
 
+class UUserDataSubsystem;
+class UBVGameInstance;
+
+
 UCLASS()
 class BUDGETVIKINGS_API AMainMenuGameMode : public AGameModeBase
 {
@@ -33,4 +37,10 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USoundClass> UISoundClass;
+
+	UPROPERTY()
+	TObjectPtr<UBVGameInstance> GameInstance;
+
+	UPROPERTY()
+	TObjectPtr<UUserDataSubsystem> UserDataSubsystem;
 };
