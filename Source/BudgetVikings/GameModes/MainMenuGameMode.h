@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BudgetVikings/EOSTypes/PlayerStats.h"
 #include "GameFramework/GameModeBase.h"
 #include "MainMenuGameMode.generated.h"
 
@@ -43,4 +44,7 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UUserDataSubsystem> UserDataSubsystem;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void CreateLoginWidget(UUserDataSubsystem* InUserDataSubsystem);
 };

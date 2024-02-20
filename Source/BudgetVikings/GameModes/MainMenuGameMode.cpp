@@ -1,5 +1,4 @@
 #include "MainMenuGameMode.h"
-
 #include "BudgetVikings/BVGameInstance.h"
 #include "BudgetVikings/UserDataSubsystem.h"
 #include "BudgetVikings/Settings/BVUserSettings.h"
@@ -17,6 +16,9 @@ void AMainMenuGameMode::BeginPlay()
 
 	UserDataSubsystem = GameInstance->GetSubsystem<UUserDataSubsystem>();
 	check(UserDataSubsystem);
+
+	CreateLoginWidget(UserDataSubsystem);
+	UserDataSubsystem->DebugDelayedFetchPlayerStats();
 }
 
 
@@ -33,4 +35,3 @@ void AMainMenuGameMode::ApplyAudioSettings() const
 	UGameplayStatics::SetSoundMixClassOverride(this, SoundMix, EffectsSoundClass, UserSettings->GetEffectsVolume(), 1.f, 0.f);
 	UGameplayStatics::SetSoundMixClassOverride(this, SoundMix, UISoundClass, UserSettings->GetUIVolume(), 1.f, 0.f);
 }
-
