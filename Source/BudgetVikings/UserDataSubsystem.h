@@ -31,7 +31,12 @@ public:
 
 	FOnUserDataLoadFinished OnUserDataLoadFinished;
 
+	FORCEINLINE FPlayerStats& GetPlayerStats() { return LoadedPlayerStats; }
+
 private:
 
 	int32 DebugLoadFailCounter = 0;
+
+	UPROPERTY()
+	FPlayerStats LoadedPlayerStats{};
 };

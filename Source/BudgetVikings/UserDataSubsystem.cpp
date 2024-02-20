@@ -37,8 +37,6 @@ void UUserDataSubsystem::DebugDelayedFetchPlayerStats()
 
 void UUserDataSubsystem::FetchPlayerStats()
 {
-	FPlayerStats LoadedPlayerStats;
-
 	FString File = FPaths::ProjectUserDir();
 	File.Append(TEXT("DebugEOSData/"));
 	File.Append(TEXT("PlayerStats.json"));
@@ -69,6 +67,5 @@ void UUserDataSubsystem::FetchPlayerStats()
 	}
 	
 	FJsonObjectConverter::JsonObjectStringToUStruct(JsonPayload, &LoadedPlayerStats, 0, 0);
-	
 	OnUserDataLoadFinished.Broadcast(++DebugLoadFailCounter > 1, LoadedPlayerStats);
 }
