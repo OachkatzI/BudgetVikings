@@ -20,4 +20,7 @@ protected:
 	
 	UFUNCTION(BlueprintImplementableEvent)
 	void PopulateList(FPlayerStats InPlayerStats);
+
+	UFUNCTION(BlueprintCallable)
+	void DebugSaveStats(FPlayerStats NewPlayerStats);
 };

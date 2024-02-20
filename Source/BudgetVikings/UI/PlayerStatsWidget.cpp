@@ -13,3 +13,13 @@ void UPlayerStatsWidget::NativeOnActivated()
 	auto UserDataSubsystem = GameInstance->GetSubsystem<UUserDataSubsystem>();
 	PopulateList(UserDataSubsystem->GetPlayerStats());
 }
+
+
+void UPlayerStatsWidget::DebugSaveStats(FPlayerStats NewPlayerStats)
+{
+	auto GameInstance = GetGameInstance<UBVGameInstance>();
+	check(GameInstance);
+
+	auto UserDataSubsystem = GameInstance->GetSubsystem<UUserDataSubsystem>();
+	UserDataSubsystem->UploadPlayerStats(NewPlayerStats);
+}

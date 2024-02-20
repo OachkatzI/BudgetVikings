@@ -4,6 +4,7 @@
 
 void UUserDataSubsystem::UploadPlayerStats(const FPlayerStats& InPlayerStats)
 {
+	LoadedPlayerStats = InPlayerStats;
 	FString JsonPayload;
 	FJsonObjectConverter::UStructToJsonObjectString(InPlayerStats, JsonPayload, 0, 0);
 
