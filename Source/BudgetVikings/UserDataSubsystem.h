@@ -6,6 +6,9 @@
 #include "UserDataSubsystem.generated.h"
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnUserDataLoadFinished, bool, bSuccess, FPlayerStats, PlayerStats);
+
+
 ///
 /// Handles interaction with Epic Online Services for PlayerStats, Loadouts and Progression
 ///
@@ -15,8 +18,20 @@ class BUDGETVIKINGS_API UUserDataSubsystem : public UGameInstanceSubsystem
 	GENERATED_BODY()
 
 public:
+	
+	void UploadPlayerStats(const FPlayerStats& InPlayerStats);
+	
+	UFUNCTION()
+	void DebugDelayedFetchPlayerStats();
 
-	void UploadPlayerStats(FPlayerStats& InPlayerStats);
+	FTimerHandle FakeLoadTimer;
+	
+	UFUNCTION()
+	void FetchPlayerStats();
 
-	void FetchPlayerStats(FPlayerStats& OutPlayerStats);
+	FOnUserDataLoadFinished OnUserDataLoadFinished;
+
+private:
+
+	int32 DebugLoadFailCounter = 0;
 };

@@ -10,20 +10,20 @@ struct FPlayerStats
 	GENERATED_BODY()
 	
 	UPROPERTY(BlueprintReadWrite)
-	int32 TotalExperience;
+	int32 TotalExperience = 0;
 
 	UPROPERTY(BlueprintReadWrite)
-	int32 TotalCoins;
+	int32 TotalCoins = 0;
 
 	UPROPERTY(BlueprintReadWrite)
-	int32 CurrentCoins;
+	int32 CurrentCoins = 0;
 
 	UPROPERTY(BlueprintReadWrite)
-	int32 Kills;
+	int32 Kills = 0;
 
 	UPROPERTY(BlueprintReadWrite)
-	int32 Deaths;
+	int32 Deaths = 0;
 
 	UPROPERTY(BlueprintReadWrite)
-	int32 NumRoundsPlayed;
+	int32 NumRoundsPlayed = 0;
 };
