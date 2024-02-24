@@ -1,8 +1,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BudgetVikings/EOSTypes/PlayerStats.h"
 #include "GameFramework/GameModeBase.h"
 #include "MainMenuGameMode.generated.h"
+
+
+class UUserDataSubsystem;
+class UBVGameInstance;
 
 
 UCLASS()
@@ -33,4 +38,13 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USoundClass> UISoundClass;
+
+	UPROPERTY()
+	TObjectPtr<UBVGameInstance> GameInstance;
+
+	UPROPERTY()
+	TObjectPtr<UUserDataSubsystem> UserDataSubsystem;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void CreateLoginWidget(UUserDataSubsystem* InUserDataSubsystem);
 };
