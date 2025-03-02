@@ -6,6 +6,8 @@
 #include "MainMenuGameMode.generated.h"
 
 
+class AMainMenuPlayerController;
+class ALoadoutEditor;
 class UUserDataSubsystem;
 class UBVGameInstance;
 
@@ -14,6 +16,12 @@ UCLASS()
 class BUDGETVIKINGS_API AMainMenuGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
+
+	UFUNCTION(BlueprintCallable)
+	void OpenLoadoutEditor();
+
+	UFUNCTION(BlueprintCallable)
+	void CloseLoadoutEditor();
 
 protected:
 	
@@ -47,4 +55,13 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void CreateLoginWidget(UUserDataSubsystem* InUserDataSubsystem);
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ALoadoutEditor> LoadoutEditorClass;
+
+	UPROPERTY()
+	TObjectPtr<ALoadoutEditor> LoadoutEditor;
+
+	UPROPERTY()
+	TObjectPtr<AMainMenuPlayerController> MenuPlayerController;
 };

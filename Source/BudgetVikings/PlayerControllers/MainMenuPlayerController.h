@@ -5,6 +5,7 @@
 #include "MainMenuPlayerController.generated.h"
 
 
+class AMainMenuCameraManager;
 class UInputMappingContext;
 
 
@@ -19,4 +20,7 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	TSet<UInputMappingContext*> MappingContexts;
+
+	UPROPERTY()
+	TObjectPtr<AMainMenuCameraManager> MenuCameraManager;
 };

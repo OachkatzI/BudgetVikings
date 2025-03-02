@@ -51,7 +51,7 @@ protected:
 private:
 	
 	UFUNCTION()
-	void HandleOnUserDataLoadFinished(bool bSuccess, FPlayerStats PlayerStats);
+	void HandleOnUserDataLoadFinished(bool bSuccess, FEOSPlayerData PlayerData);
 
 	UPROPERTY()
 	TWeakObjectPtr<UUserDataSubsystem> UserDataSubsystem;

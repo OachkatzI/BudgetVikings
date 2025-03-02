@@ -21,7 +21,7 @@ void UEOSLoginWidget::OnRetryClicked()
 	DisplayLoadingInProgress(true);
 	if (UserDataSubsystem.IsValid())
 	{
-		UserDataSubsystem.Get()->DebugDelayedFetchPlayerStats();
+		UserDataSubsystem.Get()->DebugDelayedFetchPlayerData();
 	}
 	else
 	{
@@ -31,7 +31,7 @@ void UEOSLoginWidget::OnRetryClicked()
 }
 
 
-void UEOSLoginWidget::HandleOnUserDataLoadFinished(bool bSuccess, FPlayerStats PlayerStats)
+void UEOSLoginWidget::HandleOnUserDataLoadFinished(bool bSuccess, FEOSPlayerData PlayerData)
 {
 	DisplayLoadingInProgress(false);
 

@@ -6,9 +6,9 @@
 #include "Camera/PlayerCameraManager.h"
 #include "MainMenuCameraManager.generated.h"
 
-/**
- * 
- */
+
+
+
 UCLASS()
 class BUDGETVIKINGS_API AMainMenuCameraManager : public APlayerCameraManager
 {

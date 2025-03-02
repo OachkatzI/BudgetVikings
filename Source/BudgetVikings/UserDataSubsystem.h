@@ -1,12 +1,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EOSTypes/EOSPlayerData.h"
 #include "EOSTypes/PlayerStats.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "UserDataSubsystem.generated.h"
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnUserDataLoadFinished, bool, bSuccess, FPlayerStats, PlayerStats);
+class ULoadoutDataAsset;
+
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnUserDataLoadFinished, bool, bSuccess, FEOSPlayerData, EOSPlayerData);
 
 
 ///
@@ -20,18 +24,29 @@ class BUDGETVIKINGS_API UUserDataSubsystem : public UGameInstanceSubsystem
 public:
 	
 	void UploadPlayerStats(const FPlayerStats& InPlayerStats);
+
+	void UploadPlayerLoadouts(const FPlayerLoadouts& InPlayerLoadouts);
 	
 	UFUNCTION()
-	void DebugDelayedFetchPlayerStats();
+	void DebugDelayedFetchPlayerData();
 
 	FTimerHandle FakeLoadTimer;
 	
 	UFUNCTION()
 	void FetchPlayerStats();
 
+	UFUNCTION()
+	void FetchPlayerData();
+
+	UFUNCTION()
+	void FetchPlayerLoadouts();
+
 	FOnUserDataLoadFinished OnUserDataLoadFinished;
 
 	FORCEINLINE FPlayerStats& GetPlayerStats() { return LoadedPlayerStats; }
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<TObjectPtr<ULoadoutDataAsset>> LoadoutDataAssets;
 
 private:
 
@@ -39,4 +54,10 @@ private:
 
 	UPROPERTY()
 	FPlayerStats LoadedPlayerStats{};
+
+	UPROPERTY()
+	FPlayerLoadouts LoadedPlayerLoadouts{};
+
+	UPROPERTY()
+	FEOSPlayerData LoadedEOSPlayerData{};
 };
